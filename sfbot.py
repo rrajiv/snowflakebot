@@ -1,6 +1,5 @@
 import discord
 import asyncio
-import logging
 
 # read the token from the file
 ftoken = open("token.txt", "r")
@@ -33,9 +32,6 @@ async def on_message(message):
         await client.send_message(message.author, "!se <message> - send a msg to  all the people in the elite channel")
         await client.send_message(message.author, "!sb <message> - send a msg to  all the people in the bunny channel")
         await client.send_message(message.author, "!army <param> - adds your army manually")
-        await client.send_message(message.author, "!showarmy - shows a list of all armies")
-        await client.send_message(message.author, "!timer <reason> <time> - creates a timer for a <reason> for <time>")
-#        await client.send_message(message.author, "!help - dump a list of commands by private msg")
 
     if (message.content.startswith("!se") or message.content.startswith("!sb")):
         channels = client.get_all_channels()
