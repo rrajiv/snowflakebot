@@ -29,25 +29,30 @@ async def on_ready():
 async def on_message(message):
 
     if (message.content.startswith('!help')):
-        await client.send_message(message.author, "!se <message> - send a msg to  all the people in the elite channel")
-        await client.send_message(message.author, "!sb <message> - send a msg to  all the people in the bunny channel")
-        await client.send_message(message.author, "!army <param> - adds your army manually")
+        await client.send_message(message.author, "se <message> - send a msg to  all the people in the elite channel")
+        await client.send_message(message.author, "sb <message> - send a msg to  all the people in the bunny channel")
+        await client.send_message(message.author, "army <param> <reason> - adds your army manually")
 
     if (message.content.startswith("!se") or message.content.startswith("!sb")):
         channels = client.get_all_channels()
         channelid = ""
 
+#        print(message.server)
+
         # go through each channel looking for "elitesnowflake" or "bunnysnowflake"
         for c in channels:
-            if (message.content.startswith("!se") and c.name == "elitesnowflake"):
+#            print(c.name, c.server)
+            if (message.content.startswith("!se") and c.name == "elitesnowflake" and c.server == message.server):
                 print("channel name: " + c.name)
                 print("channel id: " + c.id)
-                channelid = c
+                print("channel server: " + str(c.server))
+                channelid = c.id
 
-            if (message.content.startswith("!sb") and c.name == "bunnysnowflake"):
+            if (message.content.startswith("!sb") and c.name == "bunnysnowflake" and c.server == message.server):
                 print("channel name: " + c.name)
                 print("channel id: " + c.id)
-                channelid = c
+                print("channel server: " + str(c.server))
+                channelid = c.id
 
 
         # send a notify to everyone as long as the channel id is not empty
@@ -59,7 +64,8 @@ async def on_message(message):
             channelmessage = inputmessage.split(" ", 1)
 
             if (len(channelmessage) > 1):
-                await client.send_message(channelid, "@everyone - " + str(' '.join(channelmessage[1:])))
+                x = str(' '.join(channelmessage[1:]))
+                await (channelid, "everyone - " + x)
             else:
                 await client.send_message(channelid, "@everyone - mass alert!")
 
