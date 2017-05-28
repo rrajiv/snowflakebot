@@ -24,9 +24,7 @@ async def on_ready():
 # define the commands here to be supported
 # !se <message> - send a msg to  all the people in the elite channel
 # !sb <message> - send a msg to  all the people in the bunny channel
-# !army <param> - adds your army manually
-# !showarmy - shows a list of all armies
-# !timer <reason> <time> - creates a timer for a <reason> for <time>
+# !army <param> <reason> - adds your army manually
 # !help - dump a list of commands by private msg
 
 async def on_message(message):
